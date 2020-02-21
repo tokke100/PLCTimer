@@ -12,8 +12,10 @@ class TON{
         bool tt;
         bool dn;
         bool en;
+        bool res;
+        TON(int p);
         TON(int p, bool r);
-        void loop();
+        void update();
 };
 
 class TOF{
@@ -27,7 +29,7 @@ class TOF{
         bool dn;
         bool en;
         TOF(int p);
-        void loop();
+        void update();
 };
 
 #endif
