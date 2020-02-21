@@ -1,5 +1,5 @@
-#ifndef TIMER_H
-#define TIMER_H
+#ifndef PLCTIMER_H
+#define PLCTIMER_H
 
 class TON{
     private:
