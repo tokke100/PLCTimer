@@ -1,12 +1,31 @@
 #include "Arduino.h"
-#include "Timer.h"
+#include "PLCTimer.h"
+
+TON::TON(int p){
+    pre = p;
+    ret = false;
+    dn = false;
+    en = false;
+    tt = false;
+    acc = 0;
+    res = false;
+    previousMillis = 0;
+    currentMillis = 0;
+}
 
 TON::TON(int p, bool r){
     pre = p;
     ret = r;
+    dn = false;
+    en = false;
+    tt = false;
+    acc = 0;
+    res = false;
+    previousMillis = 0;
+    currentMillis = 0;
 }
 
-void TON::loop(){
+void TON::update(){
     if (en && !dn){
         tt = true;
         if (previousMillis == 0){
@@ -16,7 +35,8 @@ void TON::loop(){
         else {
             currentMillis = millis();
         }
-        acc = currentMillis - previousMillis;
+        acc += currentMillis - previousMillis;
+        previousMillis = currentMillis;
         if(acc >= pre){
             dn = true;
             tt = false;
@@ -39,5 +59,9 @@ void TON::loop(){
             dn = false;
             tt = false;
         }
+    }
+
+    if (res){
+        acc = 0;
     }
 }
